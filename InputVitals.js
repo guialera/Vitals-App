@@ -53,6 +53,7 @@ function InputVitals() {
     }
 
     let textInputStyle = {
+        backgroundColor: "white",
         height: 30,
         margin: 12,
         borderWidth: 1
@@ -68,7 +69,7 @@ function InputVitals() {
                     name="date"
                     onChangeText={onChangeDate}
                     value={date}
-                /> 
+                />
                 <TextInput
                     style={textInputStyle}
                     placeholder="Time"
@@ -96,7 +97,7 @@ function InputVitals() {
                     name="heartRate"
                     onChangeText={onChangeHeartRate}
                     value={heartRate}
-                /> 
+                />
                 <TextInput
                     style={textInputStyle}
                     placeholder="Oxygen Saturation"
