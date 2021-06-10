@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 
+import AppProvider from "./appContext.js"
 import Main from "./Main.js"
 
 export default function App() {
@@ -10,7 +11,9 @@ export default function App() {
       <Text
         style={styles.header}>Vitals</Text>
       <StatusBar style="auto" />
-      <Main />
+      <AppProvider>
+        <Main />
+      </AppProvider>
     </SafeAreaView>
   );
 }
@@ -21,8 +24,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'azure',
   },
   header: {
-    backgroundColor: "aqua",
+    backgroundColor: "dodgerblue",
     textAlign: "center",
-    fontSize: 25
+    fontSize: 30,
+    color: "white"
   }
 });

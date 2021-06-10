@@ -20,21 +20,54 @@ function SavedVitals(props) {
         borderWidth: 1,
         borderColor: "black",
         alignItems: "center",
-        width: 200,
-        paddingTop: 10,
+        width: 180,
+        paddingTop: 0,
         paddingBottom: 10,
         marginBottom: 10
+    }
+
+    let headerStyle = {
+        backgroundColor: "aqua",
+        alignItems: "center",
+        width: "100%",
+        marginTop: 0,
+        marginBottom: 0
+    }
+
+    let textMainStyle = {
+        lineHeight: 20
+    }
+
+    let lineStyleHeader = {
+        borderBottomColor: "black",
+        borderBottomWidth: 1,
+        alignSelf: "stretch",
+        marginTop: 0,
+        marginBottom: 5
+    }
+
+    let lineStyle = {
+        borderBottomColor: "black",
+        borderBottomWidth: 1,
+        alignSelf: "stretch",
+        marginTop: 5,
+        marginBottom: 5
     }
 
     return (
         <SafeAreaView>
             <View style={container}>
-                <Text>Date: {date}</Text>
-                <Text>Time: {time}</Text>
-                <Text>Systolic BP: {systolicBloodPressure} mmHg</Text>
-                <Text>Diastolic BP: {diastolicBloodPressure} mmHg</Text>
-                <Text>Heart Rate: {heartRate} BPM</Text>
+                <View style={headerStyle}>
+                    <Text style={textMainStyle}>Date: {date}</Text>
+                    <Text style={textMainStyle}>Time: {time}</Text>
+                </View>
+                <View style={lineStyleHeader} />
+                <Text style={textMainStyle}>Systolic BP: {systolicBloodPressure} mmHg</Text>
+                <Text style={textMainStyle}>Diastolic BP: {diastolicBloodPressure} mmHg</Text>
+                <Text style={textMainStyle}>Heart Rate: {heartRate} BPM</Text>
+                <View style={lineStyle} />
                 <Text>Oxygen Saturation: {oxygenSaturation}%</Text>
+                <View style={lineStyle} />
                 <Text>Sugar Level: {sugarLevel} mg/dL</Text>
             </View>
         </SafeAreaView>

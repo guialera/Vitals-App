@@ -1,14 +1,12 @@
 {
   "expo": {
-    "name": "vitals-app",
+    "name": "Vitals App",
     "slug": "vitals-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#f0ffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

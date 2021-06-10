@@ -1,12 +1,11 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 
-import { SafeAreaView, View, Text, TextInput, Button, Alert } from "react-native"
+import { SafeAreaView, View, ScrollView, Text, TextInput, Button, Alert } from "react-native"
 
-import axios from "axios"
+import { AppContext } from "./appContext.js"
 
 function InputVitals() {
 
-    const [vitalsData, setVitalsData] = useState([])
     const [date, onChangeDate] = useState("")
     const [time, onChangeTime] = useState("")
     const [systolicBloodPressure, onChangeSystolicBloodPressure] = useState("")
@@ -14,6 +13,8 @@ function InputVitals() {
     const [heartRate, onChangeHeartRate] = useState("")
     const [oxygenSaturation, onChangeOxygenSaturation] = useState("")
     const [sugarLevel, onChangeSugarLevel] = useState("")
+
+    const { vitals, postVitals } = useContext(AppContext)
 
     function submitVitals() {
         let newVital = {
@@ -25,18 +26,14 @@ function InputVitals() {
             oxygenSaturation: oxygenSaturation,
             sugarLevel: sugarLevel
         }
-        axios.post("https://vitals-app-api.herokuapp.com/vitals", newVital)
-            .then(response => console.log(response.data))
-            .catch(error => console.log(error))
-        setVitalsData(prevVitalsData => ([...prevVitalsData, newVital]))
-        console.log(vitalsData)
+        postVitals(newVital)
         Alert.alert(
             `Your Vitals For ${newVital.date} at ${newVital.time}`,
-            `Systolic Blood Pressure: ${newVital.systolicBloodPressure}
-            Diastolic Blood Pressure: ${newVital.diastolicBloodPressure}
-            Heart Rate: ${newVital.heartRate}
-            Oxygen Saturation: ${newVital.oxygenSaturation}
-            Sugar Level: ${newVital.sugarLevel}`
+            `Systolic Blood Pressure: ${newVital.systolicBloodPressure} mmHg \n
+            Diastolic Blood Pressure: ${newVital.diastolicBloodPressure} mmHg \n
+            Heart Rate: ${newVital.heartRate} BPM \n
+            Oxygen Saturation: ${newVital.oxygenSaturation} % \n
+            Sugar Level: ${newVital.sugarLevel} mg/dL`
         )
         onChangeDate("")
         onChangeTime("")
@@ -59,65 +56,72 @@ function InputVitals() {
         borderWidth: 1
     }
 
+    let inputButtonStyle = {
+        paddingBottom: 100
+    }
+
     return (
         <SafeAreaView>
-            <View>
-                <Text style={headerStyle}>Today's Vitals</Text>
-                <TextInput
-                    style={textInputStyle}
-                    placeholder="Date"
-                    name="date"
-                    onChangeText={onChangeDate}
-                    value={date}
-                />
-                <TextInput
-                    style={textInputStyle}
-                    placeholder="Time"
-                    name="time"
-                    onChangeText={onChangeTime}
-                    value={time}
-                />
-                <TextInput
-                    style={textInputStyle}
-                    placeholder="Systolic Blood Pressure"
-                    name="systolicBloodPressure"
-                    onChangeText={onChangeSystolicBloodPressure}
-                    value={systolicBloodPressure}
-                />
-                <TextInput
-                    style={textInputStyle}
-                    placeholder="Diastolic Blood Pressure"
-                    name="diastolicBloodPressure"
-                    onChangeText={onChangeDiastolicBloodPressure}
-                    value={diastolicBloodPressure}
-                />
-                <TextInput
-                    style={textInputStyle}
-                    placeholder="Heart Rate"
-                    name="heartRate"
-                    onChangeText={onChangeHeartRate}
-                    value={heartRate}
-                />
-                <TextInput
-                    style={textInputStyle}
-                    placeholder="Oxygen Saturation"
-                    name="oxygenSaturation"
-                    onChangeText={onChangeOxygenSaturation}
-                    value={oxygenSaturation}
+            <ScrollView>
+                <View>
+                    <Text style={headerStyle}>Today's Vitals</Text>
+                    <TextInput
+                        style={textInputStyle}
+                        placeholder="Date"
+                        name="date"
+                        onChangeText={onChangeDate}
+                        value={date}
+                    />
+                    <TextInput
+                        style={textInputStyle}
+                        placeholder="Time"
+                        name="time"
+                        onChangeText={onChangeTime}
+                        value={time}
+                    />
+                    <TextInput
+                        style={textInputStyle}
+                        placeholder="Systolic Blood Pressure"
+                        name="systolicBloodPressure"
+                        onChangeText={onChangeSystolicBloodPressure}
+                        value={systolicBloodPressure}
+                    />
+                    <TextInput
+                        style={textInputStyle}
+                        placeholder="Diastolic Blood Pressure"
+                        name="diastolicBloodPressure"
+                        onChangeText={onChangeDiastolicBloodPressure}
+                        value={diastolicBloodPressure}
+                    />
+                    <TextInput
+                        style={textInputStyle}
+                        placeholder="Heart Rate"
+                        name="heartRate"
+                        onChangeText={onChangeHeartRate}
+                        value={heartRate}
+                    />
+                    <TextInput
+                        style={textInputStyle}
+                        placeholder="Oxygen Saturation"
+                        name="oxygenSaturation"
+                        onChangeText={onChangeOxygenSaturation}
+                        value={oxygenSaturation}
 
+                    />
+                    <TextInput
+                        style={textInputStyle}
+                        placeholder="Sugar Level"
+                        name="sugarLevel"
+                        onChangeText={onChangeSugarLevel}
+                        value={sugarLevel}
+                    />
+                </View>
+                <Button
+                    title="Submit Vitals"
+                    style={inputButtonStyle}
+                    onPress={submitVitals}
                 />
-                <TextInput
-                    style={textInputStyle}
-                    placeholder="Sugar Level"
-                    name="sugarLevel"
-                    onChangeText={onChangeSugarLevel}
-                    value={sugarLevel}
-                />
-            </View>
-            <Button
-                title="Submit Vitals"
-                onPress={submitVitals}
-            />
+            </ScrollView>
         </SafeAreaView>
     )
 }

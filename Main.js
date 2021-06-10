@@ -1,16 +1,16 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 
 import { StyleSheet, Text, View, SafeAreaView, Button, ScrollView } from "react-native"
 
-import axios from "axios"
-
+import { AppContext } from "./appContext.js"
 import SavedVitals from "./VitalsData.js"
 import InputVitals from "./InputVitals.js"
 
 function Main() {
     const [showInputVitals, setShowInputVitals] = useState(false)
     const [showSavedVitals, setShowSavedVitals] = useState(false)
-    const [vitals, setVitals] = useState([])
+
+    const { vitals } = useContext(AppContext)
 
     function inputVitalsToggle() {
         setShowInputVitals(true)
@@ -20,22 +20,20 @@ function Main() {
     function savedVitalsToggle() {
         setShowSavedVitals(true)
         setShowInputVitals(false)
-        axios.get("https://vitals-app-api.herokuapp.com/vitals")
-            .then(response => setVitals(response.data))
-            .catch(error => console.log(error))
     }
 
     let retrievedVitals = vitals.map(each => <SavedVitals key={each._id} {...each} />)
 
     let inputVitalsStyle = {
-        display: showInputVitals ? "block" : "none"
+        display: showInputVitals ? "block" : "none",
     }
 
     let savedVitalsStyle = {
         display: showSavedVitals ? "block" : "none",
         flexDirection: "row",
         flexWrap: "wrap",
-        justifyContent: "space-evenly"
+        justifyContent: "space-evenly",
+        paddingBottom: 100
     }
 
     return (
