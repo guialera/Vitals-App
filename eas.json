@@ -3,7 +3,7 @@
     "ios": {
       "preview": {
         "distribution": "internal",
-        "workflow": "generic"
+        "workflow": "managed"
       }
     }
   }
