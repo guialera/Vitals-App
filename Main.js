@@ -10,7 +10,7 @@ function Main() {
     const [showInputVitals, setShowInputVitals] = useState(false)
     const [showSavedVitals, setShowSavedVitals] = useState(false)
 
-    const { vitals } = useContext(AppContext)
+    const { vitals, isLoading } = useContext(AppContext)
 
     function inputVitalsToggle() {
         setShowInputVitals(true)
@@ -36,6 +36,28 @@ function Main() {
         paddingBottom: 100
     }
 
+    let loadingContainerStyle = {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 40
+    }
+
+    let loadingScreenStyle = {
+        display: isLoading && showSavedVitals ? "block" : "none",
+        backgroundColor: "peachpuff",
+        borderWidth: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        width: 200,
+        height: 50,
+    }
+
+    let loadingTextStyle = {
+        fontSize: 25,
+        textAlign: "center"
+    }
+
     return (
         <SafeAreaView>
             <View>
@@ -56,6 +78,11 @@ function Main() {
                     {retrievedVitals}
                 </View>
             </ScrollView>
+            <View style={loadingContainerStyle}>
+                <View style={loadingScreenStyle}>
+                    <Text style={loadingTextStyle}>Loading...</Text>
+                </View>
+            </View>
         </SafeAreaView>
     )
 }

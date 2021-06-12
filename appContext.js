@@ -11,10 +11,14 @@ export default function AppProvider(props) {
     }, [])
 
     const [vitals, setVitals] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     function getVitals() {
         axios.get("https://vitals-app-api.herokuapp.com/vitals")
-            .then(response => setVitals(response.data))
+            .then(response => {
+                setVitals(response.data)
+                setIsLoading(false)
+            })
             .catch(error => console.log(error))
     }
 
@@ -29,6 +33,7 @@ export default function AppProvider(props) {
         <AppContext.Provider
             value={{
                 vitals,
+                isLoading,
                 getVitals,
                 postVitals
             }}>

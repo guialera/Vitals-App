@@ -13,6 +13,8 @@ function InputVitals() {
     const [heartRate, onChangeHeartRate] = useState("")
     const [oxygenSaturation, onChangeOxygenSaturation] = useState("")
     const [sugarLevel, onChangeSugarLevel] = useState("")
+    const [showDateButton, setShowDateButton] = useState(true)
+    const [showTimeButton, setShowTimeButton] = useState(true)
 
     const { vitals, postVitals } = useContext(AppContext)
 
@@ -44,9 +46,47 @@ function InputVitals() {
         onChangeSugarLevel("")
     }
 
+    function getDate() {
+        let month = new Date().getMonth() + 1
+        let date = new Date().getDate()
+        let year = new Date().getFullYear()
+        let currentDate = `${month}/${date}/${year}`
+        onChangeDate(currentDate)
+        setShowDateButton(false)
+    }
+
+    function getTime() {
+        let hours = new Date().getHours()
+        let minutes = new Date().getMinutes()
+        let currentTime = minutes < 10 ? `${hours}:0${minutes}` : `${hours}:${minutes}`
+        onChangeTime(currentTime)
+        setShowTimeButton(false)
+    }
+
     let headerStyle = {
         textAlign: "center",
-        fontSize: 20
+        fontSize: 25,
+        marginBottom: 10
+    }
+
+    let buttonDateStyle = {
+        display: showDateButton ? "block" : "none",
+        backgroundColor: "whitesmoke",
+        borderWidth: 1,
+        width: 200,
+        marginTop: 5,
+        marginBottom: 5,
+        marginLeft: 12
+    }
+
+    let buttonTimeStyle = {
+        display: showTimeButton ? "block" : "none",
+        backgroundColor: "whitesmoke",
+        borderWidth: 1,
+        width: 200,
+        marginTop: 5,
+        marginBottom: 5,
+        marginLeft: 12
     }
 
     let textInputStyle = {
@@ -65,6 +105,12 @@ function InputVitals() {
             <ScrollView>
                 <View>
                     <Text style={headerStyle}>Today's Vitals</Text>
+                    <View style={buttonDateStyle}>
+                        <Button
+                            onPress={getDate}
+                            title="Get Today's Date"
+                        />
+                    </View>
                     <TextInput
                         style={textInputStyle}
                         placeholder="Date"
@@ -72,6 +118,12 @@ function InputVitals() {
                         onChangeText={onChangeDate}
                         value={date}
                     />
+                    <View style={buttonTimeStyle}>
+                        <Button
+                            onPress={getTime}
+                            title="Get Current Time"
+                        />
+                    </View>
                     <TextInput
                         style={textInputStyle}
                         placeholder="Time"
