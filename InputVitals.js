@@ -97,7 +97,7 @@ function InputVitals() {
     }
 
     let inputButtonStyle = {
-        paddingBottom: 100
+        paddingBottom: 200
     }
 
     return (
