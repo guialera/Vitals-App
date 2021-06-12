@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react"
 
-import { SafeAreaView, View, ScrollView, Text, TextInput, Button, Alert } from "react-native"
+import { SafeAreaView, View, ScrollView, Text, TextInput, Button, Alert, KeyboardAvoidingView } from "react-native"
 
 import { AppContext } from "./appContext.js"
 
@@ -63,6 +63,10 @@ function InputVitals() {
         setShowTimeButton(false)
     }
 
+    let mainContainerStyle = {
+        paddingBottom: 250
+    }
+
     let headerStyle = {
         textAlign: "center",
         fontSize: 25,
@@ -102,78 +106,85 @@ function InputVitals() {
 
     return (
         <SafeAreaView>
-            <ScrollView>
-                <View>
-                    <Text style={headerStyle}>Today's Vitals</Text>
-                    <View style={buttonDateStyle}>
-                        <Button
-                            onPress={getDate}
-                            title="Get Today's Date"
-                        />
-                    </View>
-                    <TextInput
-                        style={textInputStyle}
-                        placeholder="Date"
-                        name="date"
-                        onChangeText={onChangeDate}
-                        value={date}
-                    />
-                    <View style={buttonTimeStyle}>
-                        <Button
-                            onPress={getTime}
-                            title="Get Current Time"
-                        />
-                    </View>
-                    <TextInput
-                        style={textInputStyle}
-                        placeholder="Time"
-                        name="time"
-                        onChangeText={onChangeTime}
-                        value={time}
-                    />
-                    <TextInput
-                        style={textInputStyle}
-                        placeholder="Systolic Blood Pressure"
-                        name="systolicBloodPressure"
-                        onChangeText={onChangeSystolicBloodPressure}
-                        value={systolicBloodPressure}
-                    />
-                    <TextInput
-                        style={textInputStyle}
-                        placeholder="Diastolic Blood Pressure"
-                        name="diastolicBloodPressure"
-                        onChangeText={onChangeDiastolicBloodPressure}
-                        value={diastolicBloodPressure}
-                    />
-                    <TextInput
-                        style={textInputStyle}
-                        placeholder="Heart Rate"
-                        name="heartRate"
-                        onChangeText={onChangeHeartRate}
-                        value={heartRate}
-                    />
-                    <TextInput
-                        style={textInputStyle}
-                        placeholder="Oxygen Saturation"
-                        name="oxygenSaturation"
-                        onChangeText={onChangeOxygenSaturation}
-                        value={oxygenSaturation}
+            <KeyboardAvoidingView
+                behavior="padding"
+                enabled={true}
+            >
+                <ScrollView>
+                    <View style={mainContainerStyle}>
+                        <View>
+                            <Text style={headerStyle}>Today's Vitals</Text>
+                            <View style={buttonDateStyle}>
+                                <Button
+                                    onPress={getDate}
+                                    title="Get Today's Date"
+                                />
+                            </View>
+                            <TextInput
+                                style={textInputStyle}
+                                placeholder="Date"
+                                name="date"
+                                onChangeText={onChangeDate}
+                                value={date}
+                            />
+                            <View style={buttonTimeStyle}>
+                                <Button
+                                    onPress={getTime}
+                                    title="Get Current Time"
+                                />
+                            </View>
+                            <TextInput
+                                style={textInputStyle}
+                                placeholder="Time"
+                                name="time"
+                                onChangeText={onChangeTime}
+                                value={time}
+                            />
+                            <TextInput
+                                style={textInputStyle}
+                                placeholder="Systolic Blood Pressure"
+                                name="systolicBloodPressure"
+                                onChangeText={onChangeSystolicBloodPressure}
+                                value={systolicBloodPressure}
+                            />
+                            <TextInput
+                                style={textInputStyle}
+                                placeholder="Diastolic Blood Pressure"
+                                name="diastolicBloodPressure"
+                                onChangeText={onChangeDiastolicBloodPressure}
+                                value={diastolicBloodPressure}
+                            />
+                            <TextInput
+                                style={textInputStyle}
+                                placeholder="Heart Rate"
+                                name="heartRate"
+                                onChangeText={onChangeHeartRate}
+                                value={heartRate}
+                            />
+                            <TextInput
+                                style={textInputStyle}
+                                placeholder="Oxygen Saturation"
+                                name="oxygenSaturation"
+                                onChangeText={onChangeOxygenSaturation}
+                                value={oxygenSaturation}
 
-                    />
-                    <TextInput
-                        style={textInputStyle}
-                        placeholder="Sugar Level"
-                        name="sugarLevel"
-                        onChangeText={onChangeSugarLevel}
-                        value={sugarLevel}
-                    />
-                </View>
-                <Button
-                    title="Submit Vitals"
-                    style={inputButtonStyle}
-                    onPress={submitVitals}
-                />
-            </ScrollView>
+                            />
+                            <TextInput
+                                style={textInputStyle}
+                                placeholder="Sugar Level"
+                                name="sugarLevel"
+                                onChangeText={onChangeSugarLevel}
+                                value={sugarLevel}
+                            />
+                        </View>
+                        <Button
+                            title="Submit Vitals"
+                            style={inputButtonStyle}
+                            onPress={submitVitals}
+                        />
+                    </View>
+                </ScrollView>
+            </KeyboardAvoidingView>
         </SafeAreaView>
     )
 }
